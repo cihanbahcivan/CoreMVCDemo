@@ -8,12 +8,12 @@ using DataAccessLayer.EntityFramework;
 
 namespace CoreMVCDemo.Controllers
 {
-    public class CategoryController : Controller
+    public class BlogController : Controller
     {
-        private CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
+        private BlogManager blogManager = new BlogManager(new EfBlogRepository());
         public IActionResult Index()
         {
-            var values = categoryManager.GetAll();
+            var values = blogManager.GetAll();
             return View(values);
         }
     }

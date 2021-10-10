@@ -19,6 +19,7 @@ namespace BusinessLayer.Concrete
         }
         public void Add(Blog blog)
         {
+            //business rules
             _blogDal.Insert(blog);
         }
 

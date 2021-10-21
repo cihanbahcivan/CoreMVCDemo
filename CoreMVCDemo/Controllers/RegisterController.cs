@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 
 namespace CoreMVCDemo.Controllers
 {
@@ -22,10 +24,25 @@ namespace CoreMVCDemo.Controllers
         [HttpPost]
         public IActionResult Index(Writer writer)
         {
-            writer.WriterStatus = true;
-            writer.WriterAbout = "Deneme test";
-            _writerManager.Add(writer);
-            return RedirectToAction("Index", "Blog");
+            WriterValidator writerValidator = new WriterValidator();
+            ValidationResult results = writerValidator.Validate(writer);
+            if (results.IsValid)
+            {
+                writer.WriterStatus = true;
+                writer.WriterAbout = "Deneme test";
+                _writerManager.Add(writer);
+                return RedirectToAction("Index", "Blog");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName,item.ErrorMessage);
+                }
+            }
+
+            return View();
+
         }
     }
 }

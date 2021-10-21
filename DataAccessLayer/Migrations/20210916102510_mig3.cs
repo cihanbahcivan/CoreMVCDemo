@@ -23,7 +23,7 @@ namespace DataAccessLayer.Migrations
                 table: "Comments",
                 column: "BlogId",
                 principalTable: "Blogs",
-                principalColumn: "BlogID",
+                principalColumn: "BlogId",
                 onDelete: ReferentialAction.Cascade);
         }
 

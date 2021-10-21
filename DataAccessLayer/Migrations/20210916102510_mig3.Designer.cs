@@ -53,7 +53,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Blog", b =>
                 {
-                    b.Property<int>("BlogID")
+                    b.Property<int>("BlogId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -79,7 +79,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.HasKey("BlogID");
+                    b.HasKey("BlogId");
 
                     b.HasIndex("CategoryId");
 

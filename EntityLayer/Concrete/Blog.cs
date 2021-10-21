@@ -11,7 +11,7 @@ namespace EntityLayer.Concrete
     public class Blog
     {
         [Key]
-        public int BlogID { get; set; }
+        public int BlogId { get; set; }
         public string BlogTitle { get; set; }
         public string BlogContent { get; set; }
         public DateTime BlogCreateDate { get; set; }
@@ -21,6 +21,9 @@ namespace EntityLayer.Concrete
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<Comment> Comments { get; set; }
+        public int WriterId { get; set; }
+        public Writer Writer { get; set; }
+
 
     }
 }

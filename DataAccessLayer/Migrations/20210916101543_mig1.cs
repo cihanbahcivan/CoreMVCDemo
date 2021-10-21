@@ -29,7 +29,7 @@ namespace DataAccessLayer.Migrations
                 name: "Blogs",
                 columns: table => new
                 {
-                    BlogID = table.Column<int>(type: "int", nullable: false)
+                    BlogId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BlogTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BlogContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -40,7 +40,7 @@ namespace DataAccessLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Blogs", x => x.BlogID);
+                    table.PrimaryKey("PK_Blogs", x => x.BlogId);
                 });
 
             migrationBuilder.CreateTable(

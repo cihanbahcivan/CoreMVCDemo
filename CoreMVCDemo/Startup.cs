@@ -28,9 +28,7 @@ namespace CoreMVCDemo
         {
             services.AddControllersWithViews();
 
-            services.AddSession();
-
-            services.AddMvc(config=>
+            services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
@@ -39,11 +37,20 @@ namespace CoreMVCDemo
             });
 
             services.AddMvc();
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(x =>
-                {
-                    x.LoginPath = "/Login/Index";
-                });
+            services.AddAuthentication(
+                    CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(x =>
+                    {
+                        x.LoginPath = "/Login/Index";
+                    });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = "/Login/Index/";
+                options.SlidingExpiration = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,13 +67,11 @@ namespace CoreMVCDemo
                 app.UseHsts();
             }
 
-            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1","?code={0}");
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1", "?code={0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseSession();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();

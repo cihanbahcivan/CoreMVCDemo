@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Shared\Components\LastBlog\**" />
+    <Content Remove="Views\Shared\Components\LastBlog\**" />
+    <EmbeddedResource Remove="Views\Shared\Components\LastBlog\**" />
+    <None Remove="Views\Shared\Components\LastBlog\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.3.3" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />

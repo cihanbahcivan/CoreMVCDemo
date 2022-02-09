@@ -23,5 +23,11 @@ namespace CoreMVCDemo.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public IActionResult Test()
+        {
+            return View();
+        }
     }
 }

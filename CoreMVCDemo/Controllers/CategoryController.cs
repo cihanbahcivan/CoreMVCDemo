@@ -10,10 +10,10 @@ namespace CoreMVCDemo.Controllers
 {
     public class CategoryController : Controller
     {
-        private CategoryManager categoryManager = new CategoryManager(new EfCategoryRepository());
+        private readonly CategoryManager _categoryManager = new CategoryManager(new EfCategoryRepository());
         public IActionResult Index()
         {
-            var values = categoryManager.GetAll();
+            var values = _categoryManager.GetAll();
             return View(values);
         }
     }

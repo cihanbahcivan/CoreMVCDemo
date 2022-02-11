@@ -10,17 +10,23 @@ namespace CoreMVCDemo.Controllers
 {
     public class BlogController : Controller
     {
-        private BlogManager blogManager = new BlogManager(new EfBlogRepository());
+        private readonly BlogManager _blogManager = new BlogManager(new EfBlogRepository());
         public IActionResult Index()
         {
-            var values = blogManager.GetBlogListWithCategory();
+            var values = _blogManager.GetBlogListWithCategory();
             return View(values);
         }
 
         public IActionResult BlogReadAll(int id)
         {
             ViewBag.i = id;
-            var values = blogManager.GetBlogById(id);
+            var values = _blogManager.GetBlogById(id);
+            return View(values);
+        }
+
+        public IActionResult BlogListByWriter()
+        {
+            var values = _blogManager.GetBlogListByWriter(1);
             return View(values);
         }
     }

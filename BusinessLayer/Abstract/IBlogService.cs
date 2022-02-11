@@ -7,14 +7,9 @@ using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IBlogService
+    public interface IBlogService : IGenericService<Blog>
     {
-        void Add(Blog blog);
-        void Update(Blog blog);
-        void Delete(Blog blog);
-        List<Blog> GetAll();
-        Blog GetById(int id);
         List<Blog> GetBlogById(int id);
-        List<Blog> GetBlogsByWriter(int id);
+        List<Blog> GetBlogListByWriter(int id);
     }
 }

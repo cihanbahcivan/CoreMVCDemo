@@ -24,7 +24,7 @@ namespace CoreMVCDemo.Controllers
         {
             p.ContactDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             p.ContactStatus = true;
-            _contactManager.AddContact(p);
+            _contactManager.Add(p);
             return RedirectToAction("Index","Blog");
         }
     }

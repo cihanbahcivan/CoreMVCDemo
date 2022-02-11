@@ -14,7 +14,7 @@ namespace CoreMVCDemo.ViewComponents.Comment
         CommentManager commentManager = new CommentManager(new EfCommentRepository());
         public IViewComponentResult Invoke(int id)
         {
-            var values = commentManager.GetAll(id);
+            var values = commentManager.GetAllByBlogId(id);
 
             return View(values);
         }

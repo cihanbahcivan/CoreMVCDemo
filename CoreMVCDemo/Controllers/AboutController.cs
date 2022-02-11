@@ -10,10 +10,10 @@ namespace CoreMVCDemo.Controllers
 {
     public class AboutController : Controller
     {
-        private AboutManager _aboutManager = new AboutManager(new EfAboutRepository());
+        private readonly AboutManager _aboutManager = new AboutManager(new EfAboutRepository());
         public IActionResult Index()
         {
-            var values = _aboutManager.GetList();
+            var values = _aboutManager.GetAll();
             return View(values);
         }
 

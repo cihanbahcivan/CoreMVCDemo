@@ -11,26 +11,26 @@ namespace BusinessLayer.Concrete
 {
     public class BlogManager : IBlogService
     {
-        private IBlogDal _blogDal;
+        private readonly IBlogDal _blogDal;
 
         public BlogManager(IBlogDal blogDal)
         {
             _blogDal = blogDal;
         }
-        public void Add(Blog blog)
+        public void Add(Blog entity)
         {
             //business rules
-            _blogDal.Insert(blog);
+            _blogDal.Insert(entity);
         }
 
-        public void Update(Blog blog)
+        public void Update(Blog entity)
         {
-            _blogDal.Update(blog);
+            _blogDal.Update(entity);
         }
 
-        public void Delete(Blog blog)
+        public void Delete(Blog entity)
         {
-            _blogDal.Delete(blog);
+            _blogDal.Delete(entity);
         }
 
         public List<Blog> GetAll()
@@ -47,7 +47,7 @@ namespace BusinessLayer.Concrete
             return _blogDal.GetAll(x => x.BlogId == id);
         }
 
-        public List<Blog> GetBlogsByWriter(int id)
+        public List<Blog> GetBlogListByWriter(int id)
         {
             return _blogDal.GetAll(x => x.WriterId == id);
         }

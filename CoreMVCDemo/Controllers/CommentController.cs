@@ -40,7 +40,7 @@ namespace CoreMVCDemo.Controllers
 
         public PartialViewResult CommentListByBlog(int id)
         {
-            var values= commentManager.GetAll(id);
+            var values= commentManager.GetAllByBlogId(id);
             return PartialView(values);
         }
     }

@@ -11,16 +11,36 @@ namespace BusinessLayer.Concrete
 {
     public class ContactManager : IContactService
     {
-        private IContactDal _contactDal;
+        private readonly IContactDal _contactDal;
 
         public ContactManager(IContactDal contactDal)
         {
             _contactDal = contactDal;
         }
 
-        public void AddContact(Contact contact)
+        public void Add(Contact entity)
         {
-            _contactDal.Insert(contact);
+            _contactDal.Insert(entity);
+        }
+
+        public void Update(Contact entity)
+        {
+            _contactDal.Update(entity);
+        }
+
+        public void Delete(Contact entity)
+        {
+            _contactDal.Delete(entity);
+        }
+
+        public List<Contact> GetAll()
+        {
+            return _contactDal.GetAll();
+        }
+
+        public Contact GetById(int id)
+        {
+            return _contactDal.GetById(id);
         }
     }
 }

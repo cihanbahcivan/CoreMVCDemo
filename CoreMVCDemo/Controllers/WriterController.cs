@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
+using CoreMVCDemo.Models;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
@@ -57,6 +59,7 @@ namespace CoreMVCDemo.Controllers
             var writerValues = writerManager.GetById(1);
             return View(writerValues);
         }
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult WriterEditProfile(Writer p)
         {
@@ -77,5 +80,39 @@ namespace CoreMVCDemo.Controllers
 
             return View();
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult WriterAdd()
+        {
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult WriterAdd(AddProfileImage p)
+        {
+            Writer writer = new Writer();
+            if (p.WriterImage != null)
+            {
+                var extension = Path.GetExtension(p.WriterImage.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newImageName);
+                var stream = new FileStream(location, FileMode.Create);
+                p.WriterImage.CopyTo(stream);
+                writer.WriterImage = newImageName;
+            }
+
+            writer.WriterMail = p.WriterMail;
+            writer.WriterAbout = p.WriterAbout;
+            writer.WriterPassword = p.WriterPassword;
+            writer.WriterStatus = true;
+            writer.WriterName = p.WriterName;
+            writerManager.Add(writer);
+            return RedirectToAction("Index", "Dashboard");
+        }
+
+
     }
 }

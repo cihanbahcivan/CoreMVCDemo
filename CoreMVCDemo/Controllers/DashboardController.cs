@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataAccessLayer.Concrete;
 
 namespace CoreMVCDemo.Controllers
 {
@@ -10,6 +11,12 @@ namespace CoreMVCDemo.Controllers
     {
         public IActionResult Index()
         {
+            using(Context context = new Context())
+            {
+                ViewBag.v1 = context.Blogs.Count().ToString();
+                ViewBag.v2 = context.Blogs.Where(x => x.WriterId == 1).Count().ToString();
+                ViewBag.v3 = context.Categories.Count().ToString();
+            }
 
             return View();
         }
